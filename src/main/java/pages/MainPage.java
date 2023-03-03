@@ -1,9 +1,11 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.bidi.log.Log;
+
+import java.util.concurrent.TimeUnit;
 
 public class MainPage extends BasePage {
 
@@ -14,9 +16,11 @@ public class MainPage extends BasePage {
     private final By firstSauce =  By.cssSelector("div[class*=\"BurgerIngredients\"] ul:nth-of-type(2) a:nth-of-type(1)");
     private final By firstFilling =  By.cssSelector("div[class*=\"BurgerIngredients\"] ul:nth-of-type(3) a:nth-of-type(1)");
 
-    private final By bunButton = By.cssSelector("span.text:nth-of-type(1)");
-    private final By sauceButton = By.cssSelector("span.text:nth-of-type(2)");
-    private final By fillingButton = By.cssSelector("span.text:nth-of-type(3)");
+    private final By bunButton = By.cssSelector("div[class*='tab']:nth-of-type(1) .text");
+    private final By sauceButton = By.cssSelector("div[class*='tab']:nth-of-type(2) .text");
+    private final By fillingButton = By.cssSelector("div[class*='tab']:nth-of-type(3) .text");
+
+    private final By beginningOfIngredientList = By.cssSelector("div[class*=BurgerIngredients]");
     public MainPage(WebDriver driver) {
         this.driver = driver;
     }
@@ -43,15 +47,31 @@ public class MainPage extends BasePage {
         return this;
     }
 
+    public Double getYCoordinateOfElement(By locator){
+        WebElement element = driver.findElement(locator);
+        String script = "y = window.scrollY + arguments[0].getBoundingClientRect().top; return y;";
+        Object y = ((JavascriptExecutor)driver).executeScript(script, element);
+        return (Double) y;
+    }
+    public boolean checkIfScrolledTo(By locator){
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        Double itemPosition = getYCoordinateOfElement(locator);
+        Double startPosition = getYCoordinateOfElement(beginningOfIngredientList);
+        return itemPosition > startPosition ;
+    }
     public boolean checkIfBunsAreVisible(){
-        return driver.findElement(firstBun).isDisplayed();
+        return checkIfScrolledTo(firstBun);
     }
 
     public boolean checkIfSaucesAreVisible(){
-        return driver.findElement(firstSauce).isDisplayed();
+        return checkIfScrolledTo(firstSauce);
     }
     public boolean checkIfFillingsAreVisible(){
-        return driver.findElement(firstFilling).isDisplayed();
+        return checkIfScrolledTo(firstFilling);
     }
 
 }
