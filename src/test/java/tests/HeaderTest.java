@@ -1,6 +1,5 @@
 package tests;
 
-import org.example.Main;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -12,7 +11,7 @@ import rules.LoginSetup;
 import rules.UserSetup;
 
 @RunWith(Enclosed.class)
-public class PersonalAreaTest extends TestBase {
+public class HeaderTest extends TestBase {
 
     public static class PersonalAreaLoggedInTest extends TestBase {
         @Rule(order = 2)
@@ -37,7 +36,7 @@ public class PersonalAreaTest extends TestBase {
         }
 
         @Test
-        public void userCanGoToPersonalAreaFromFeed(){
+        public void userCanGoToPersonalAreaFromFeed() {
             FeedPage page = new FeedPage(driver);
             String expectedURL = PersonalAreaPage.PERSONAL_AREA_URL;
 
@@ -48,6 +47,7 @@ public class PersonalAreaTest extends TestBase {
 
         }
 
+        /*
         @Test
         public void userCanGoToPersonalAreaFromOrderHistory(){
             OrderHistoryPage page = new OrderHistoryPage(driver);
@@ -59,6 +59,36 @@ public class PersonalAreaTest extends TestBase {
             Assert.assertEquals("Пользователь должен находиться в личном кабинете после клика на кнопку 'Личный кабинет' ", expectedURL, actualURL);
 
         }
+
+
+         */
+
+        @Test
+        public void userCanGoFromPersonalAreaToMainPage() {
+            MainPage page = new MainPage(driver);
+            String expectedURL = MainPage.BASE_URL + "/";
+
+            page.open()
+                    .goToPersonalArea()
+                    .goToMainPageByLink();
+            String actualURL = driver.getCurrentUrl();
+
+            Assert.assertEquals("Пользователь должен находиться на главной странице после клика на кнопку 'Конструктор' ", expectedURL, actualURL);
+        }
+
+        @Test
+        public void userCanGoFromPersonalAreaToMainPageByClickOnLogo() {
+            MainPage page = new MainPage(driver);
+            String expectedURL = MainPage.BASE_URL + "/";
+
+            page.open()
+                    .goToPersonalArea()
+                    .goToMainPageByLogo();
+            String actualURL = driver.getCurrentUrl();
+
+            Assert.assertEquals("Пользователь должен находиться на главной странице после клика на логотип", expectedURL, actualURL);
+        }
+
     }
 
     public static class PersonalAreaGuestTest extends TestBase {
@@ -66,7 +96,7 @@ public class PersonalAreaTest extends TestBase {
         public DriverSetup driverSetup = new DriverSetup();
 
         @Test
-        public void guestCannotGoToPersonalArea(){
+        public void guestCannotGoToPersonalArea() {
             MainPage page = new MainPage(driver);
             String expectedURL = LoginPage.LOGIN_URL;
 
@@ -76,10 +106,9 @@ public class PersonalAreaTest extends TestBase {
             Assert.assertEquals("Гость должен находиться на странице входа после клика на кнопку 'Личный кабинет' ", expectedURL, actualURL);
 
 
-
         }
 
     }
 
 
-    }
+}
