@@ -25,7 +25,7 @@ public class UserSetup implements MethodRule {
 
         page.open()
                 .register(name, email, password);
-        System.out.println("User set");
+        System.out.println("User created");
 
         try {
             return new Statement() {
