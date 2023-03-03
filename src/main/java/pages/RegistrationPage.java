@@ -2,21 +2,20 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class RegistrationPage extends BasePage {
 
     public static final String REGISTER_URL = String.format("%s/register", BASE_URL);
 
-    private final By nameFieldLocator = By.xpath("//*[text()='Имя']/parent::*/input");
-    private final By emailFieldLocator = By.xpath("//*[text()='Email']/parent::*/input");
-    private final By passwordFieldLocator = By.xpath("//*[text()='Пароль']/parent::*/input");
+    private final By nameField = By.xpath("//*[text()='Имя']/parent::*/input");
+    private final By emailField = By.xpath("//*[text()='Email']/parent::*/input");
+    private final By passwordField = By.xpath("//*[text()='Пароль']/parent::*/input");
 
-    private final By registerButtonLocator = By.xpath("//button[text()=\"Зарегистрироваться\"]");
+    private final By registerButton = By.xpath("//button[text()=\"Зарегистрироваться\"]");
 
-    private final By loginLinkLocator = By.xpath("//a[@href=\"/login\"]");
+    private final By loginLink = By.xpath("//a[@href=\"/login\"]");
 
-    private final By errorMessageLocator = By.cssSelector("p.input__error");
+    private final By errorMessage = By.cssSelector("p.input__error");
     public RegistrationPage(WebDriver driver) {
         this.driver = driver;
     }
@@ -33,30 +32,34 @@ public class RegistrationPage extends BasePage {
         return new LoginPage(driver);
     }
 
-    public void setName(String name) {
-        WebElement nameField = driver.findElement(nameFieldLocator);
-        nameField.sendKeys(name);
-    }
-
-    public void setEmail(String email) {
-        WebElement emailField = driver.findElement(emailFieldLocator);
-        emailField.sendKeys(email);
-    }
-
-    public void setPassword(String password) {
-        WebElement passwordField = driver.findElement(passwordFieldLocator);
-        passwordField.sendKeys(password);
+    public RegistrationPage setName(String name) {
+        driver.findElement(nameField).sendKeys(name);
+        return this;
 
     }
 
-    public void clickRegisterButton() {
-        WebElement registerButton = driver.findElement(registerButtonLocator);
-        registerButton.click();
+    public RegistrationPage setEmail(String email) {
+        driver.findElement(emailField).sendKeys(email);
+        return this;
+    }
+
+    public RegistrationPage setPassword(String password) {
+        driver.findElement(passwordField).sendKeys(password);
+        return this;
+
+    }
+
+    public RegistrationPage clickRegisterButton() {
+        driver.findElement(registerButton).click();
+        return this;
     }
 
     public LoginPage goToLoginPage(){
-        WebElement loginLink = driver.findElement(loginLinkLocator);
-        loginLink.click();
+        driver.findElement(loginLink).click();
         return new LoginPage(driver);
+    }
+
+    public boolean checkIfPasswordErrorShown(){
+        return driver.findElement(errorMessage).isDisplayed();
     }
 }

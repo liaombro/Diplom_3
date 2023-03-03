@@ -2,8 +2,15 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 
 public class LoginPage extends BasePage {
+
+
 
     public static final String LOGIN_URL = String.format("%s/login", BASE_URL);
 
@@ -24,19 +31,22 @@ public class LoginPage extends BasePage {
         setEmail(email);
         setPassword(password);
         clickLoginButton();
+        new WebDriverWait(driver, Duration.of(5, ChronoUnit.SECONDS)).until(ExpectedConditions.urlToBe(BASE_URL+"/"));
         return new MainPage(driver);
     }
 
     public void setPassword(String password) {
-        driver.findElement(this.passwordField).sendKeys(password);
+        new WebDriverWait(driver, Duration.of(5, ChronoUnit.SECONDS)).until(ExpectedConditions.elementToBeClickable(passwordField));
+        sendKeysTwice(passwordField, password);
     }
 
     public void setEmail(String email) {
-       driver.findElement(this.emailField).sendKeys(email);
+        new WebDriverWait(driver, Duration.of(5, ChronoUnit.SECONDS)).until(ExpectedConditions.elementToBeClickable(emailField));
+        sendKeysTwice(emailField, email);
     }
 
     public void clickLoginButton() {
-        driver.findElement(loginButton).click();
+        clickTwice(loginButton);
     }
 
 }
