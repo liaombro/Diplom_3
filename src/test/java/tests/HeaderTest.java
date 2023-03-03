@@ -47,22 +47,6 @@ public class HeaderTest extends TestBase {
 
         }
 
-        /*
-        @Test
-        public void userCanGoToPersonalAreaFromOrderHistory(){
-            OrderHistoryPage page = new OrderHistoryPage(driver);
-            String expectedURL = PersonalAreaPage.PERSONAL_AREA_URL;
-
-            page.open().goToPersonalArea();
-            String actualURL = driver.getCurrentUrl();
-
-            Assert.assertEquals("Пользователь должен находиться в личном кабинете после клика на кнопку 'Личный кабинет' ", expectedURL, actualURL);
-
-        }
-
-
-         */
-
         @Test
         public void userCanGoFromPersonalAreaToMainPage() {
             MainPage page = new MainPage(driver);
