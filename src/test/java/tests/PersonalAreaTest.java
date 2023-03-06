@@ -3,7 +3,6 @@ package tests;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
-import pages.LoginPage;
 import pages.MainPage;
 import rules.DriverSetup;
 import rules.LoginSetup;
@@ -23,14 +22,13 @@ public class PersonalAreaTest extends TestBase {
     @Test
     public void userCanLogout() {
         MainPage page = new MainPage(driver);
-        String expectedURL = LoginPage.LOGIN_URL;
 
-        page.open()
+        boolean isLoginPage = page.open()
                 .goToPersonalArea()
-                .logOut();
-        String actualURL = driver.getCurrentUrl();
+                .logOut()
+                .isLoginPage();
 
-        Assert.assertEquals("После выхода из аккаунта пользователь должен находиться на странице входа", expectedURL, actualURL);
+        Assert.assertTrue("После выхода из аккаунта пользователь должен находиться на странице входа", isLoginPage);
 
     }
 }

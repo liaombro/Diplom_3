@@ -26,51 +26,49 @@ public class HeaderTest extends TestBase {
         @Test
         public void userCanGoToPersonalAreaFromMainPage() {
             MainPage page = new MainPage(driver);
-            String expectedURL = PersonalAreaPage.PERSONAL_AREA_URL;
 
-            page.open().goToPersonalArea();
-            String actualURL = driver.getCurrentUrl();
+            boolean isPersonalArea = page.open()
+                    .goToPersonalArea()
+                    .isPersonalAreaPage();
 
-            Assert.assertEquals("Пользователь должен находиться в личном кабинете после клика на кнопку 'Личный кабинет' ", expectedURL, actualURL);
+            Assert.assertTrue("Пользователь должен находиться в личном кабинете после клика на кнопку 'Личный кабинет' ", isPersonalArea);
 
         }
 
         @Test
         public void userCanGoToPersonalAreaFromFeed() {
             FeedPage page = new FeedPage(driver);
-            String expectedURL = PersonalAreaPage.PERSONAL_AREA_URL;
 
-            page.open().goToPersonalArea();
-            String actualURL = driver.getCurrentUrl();
+            boolean isPersonalArea = page.open()
+                    .goToPersonalArea()
+                    .isPersonalAreaPage();
 
-            Assert.assertEquals("Пользователь должен находиться в личном кабинете после клика на кнопку 'Личный кабинет' ", expectedURL, actualURL);
+            Assert.assertTrue("Пользователь должен находиться в личном кабинете после клика на кнопку 'Личный кабинет' ", isPersonalArea);
 
         }
 
         @Test
         public void userCanGoFromPersonalAreaToMainPage() {
             MainPage page = new MainPage(driver);
-            String expectedURL = MainPage.BASE_URL + "/";
 
-            page.open()
+            boolean isMainPage = page.open()
                     .goToPersonalArea()
-                    .goToMainPageByLink();
-            String actualURL = driver.getCurrentUrl();
+                    .goToMainPageByLink()
+                    .isMainPage();
 
-            Assert.assertEquals("Пользователь должен находиться на главной странице после клика на кнопку 'Конструктор' ", expectedURL, actualURL);
+            Assert.assertTrue("Пользователь должен находиться на главной странице после клика на кнопку 'Конструктор' ", isMainPage);
         }
 
         @Test
         public void userCanGoFromPersonalAreaToMainPageByClickOnLogo() {
             MainPage page = new MainPage(driver);
-            String expectedURL = MainPage.BASE_URL + "/";
 
-            page.open()
+            boolean isMainPage = page.open()
                     .goToPersonalArea()
-                    .goToMainPageByLogo();
-            String actualURL = driver.getCurrentUrl();
+                    .goToMainPageByLogo()
+                    .isMainPage();
 
-            Assert.assertEquals("Пользователь должен находиться на главной странице после клика на логотип", expectedURL, actualURL);
+            Assert.assertTrue("Пользователь должен находиться на главной странице после клика на логотип", isMainPage);
         }
 
     }
@@ -82,12 +80,12 @@ public class HeaderTest extends TestBase {
         @Test
         public void guestCannotGoToPersonalArea() {
             MainPage page = new MainPage(driver);
-            String expectedURL = LoginPage.LOGIN_URL;
+            LoginPage loginPage = new LoginPage(driver);
 
             page.open().goToPersonalArea();
-            String actualURL = driver.getCurrentUrl();
+            boolean isLoginPage = loginPage.isLoginPage();
 
-            Assert.assertEquals("Гость должен находиться на странице входа после клика на кнопку 'Личный кабинет' ", expectedURL, actualURL);
+            Assert.assertTrue("Гость должен находиться на странице входа после клика на кнопку 'Личный кабинет' ", isLoginPage);
 
 
         }

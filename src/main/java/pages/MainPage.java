@@ -74,4 +74,8 @@ public class MainPage extends BasePage {
         return checkIfScrolledTo(firstFilling);
     }
 
+    public boolean isMainPage(){
+        return driver.findElement(firstBun).isDisplayed();
+    }
+
 }

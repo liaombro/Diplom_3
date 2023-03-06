@@ -24,4 +24,8 @@ public class PersonalAreaPage extends BasePage {
     public String getEmail(){
         return driver.findElement(email).getAttribute("value");
     }
+
+    public boolean isPersonalAreaPage(){
+        return driver.findElement(logoutButton).isDisplayed();
+    }
 }

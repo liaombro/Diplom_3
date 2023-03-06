@@ -49,4 +49,7 @@ public class LoginPage extends BasePage {
         clickTwice(loginButton);
     }
 
+    public boolean isLoginPage(){
+        return driver.findElement(passwordField).isDisplayed();
+    }
 }
