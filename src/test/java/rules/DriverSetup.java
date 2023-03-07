@@ -17,8 +17,9 @@ public class DriverSetup implements MethodRule {
     public Statement apply(Statement base, FrameworkMethod method, Object target) {
 
         TestBase testClass = (TestBase) target;
-        String browser = testClass.browser;
         WebDriver driver;
+
+        String browser = System.getProperty("browser");
 
         if (browser.equals("chrome")){
             driver = new ChromeDriver();
