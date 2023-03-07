@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -8,6 +9,7 @@ import rules.DriverSetup;
 import rules.LoginSetup;
 import rules.UserSetup;
 
+@DisplayName("Главная страница")
 public class ConstructionKitTest extends TestBase {
     @Rule(order = 2)
     public DriverSetup driverSetup = new DriverSetup();
@@ -19,6 +21,7 @@ public class ConstructionKitTest extends TestBase {
     public LoginSetup loginSetup = new LoginSetup();
 
     @Test
+    @DisplayName("Проверка скролла к начинкам")
     public void clickOnFillingsButtonScrollsPageToFillings() {
         MainPage page = new MainPage(driver);
 
@@ -30,6 +33,7 @@ public class ConstructionKitTest extends TestBase {
     }
 
     @Test
+    @DisplayName("Проверка скролла к соусам")
     public void clickOnSaucesButtonScrollsPageToSauces() {
         MainPage page = new MainPage(driver);
 
@@ -41,6 +45,7 @@ public class ConstructionKitTest extends TestBase {
     }
 
     @Test
+    @DisplayName("Проверка скролла к булкам")
     public void clickOnBunsButtonScrollsPageToBuns() {
         MainPage page = new MainPage(driver);
 

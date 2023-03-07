@@ -14,8 +14,8 @@ public class LoginPage extends BasePage {
 
     public static final String LOGIN_URL = String.format("%s/login", BASE_URL);
 
-    private final By emailField = By.cssSelector(".input_type_text input");
-    private final By passwordField = By.cssSelector(".input_type_password  input");
+    private final By emailField = By.cssSelector("input[type='text']");
+    private final By passwordField = By.cssSelector("input[type='password']");
     private final By loginButton = By.cssSelector(".mb-20 > button");
 
     public LoginPage(WebDriver driver) {
@@ -28,7 +28,9 @@ public class LoginPage extends BasePage {
     }
 
     public MainPage login(String email, String password) {
+        setEmail("");
         setEmail(email);
+        setPassword("");
         setPassword(password);
         clickLoginButton();
         new WebDriverWait(driver, Duration.of(5, ChronoUnit.SECONDS)).until(ExpectedConditions.urlToBe(BASE_URL+"/"));

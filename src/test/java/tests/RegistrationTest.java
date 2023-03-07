@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.junit4.DisplayName;
 import net.bytebuddy.utility.RandomString;
 import org.junit.Rule;
 import org.junit.Test;
@@ -8,6 +9,7 @@ import rules.DriverSetup;
 
 import static org.junit.Assert.assertEquals;
 
+@DisplayName("Страница регистрации")
 public class RegistrationTest extends TestBase {
 
 
@@ -15,6 +17,7 @@ public class RegistrationTest extends TestBase {
     public DriverSetup driverSetup = new DriverSetup();
 
     @Test
+    @DisplayName("Проверка создания аккаунта")
     public void guestCanRegisterAccount() {
         RegistrationPage page = new RegistrationPage(driver);
         String random = RandomString.make(10).toLowerCase();
@@ -33,6 +36,8 @@ public class RegistrationTest extends TestBase {
     }
 
     @Test
+    @DisplayName("Показывается сообщение об ошибке, если пароль слишком короткий")
+
     public void errorMessageShownIfPasswordIsShorterThan6Symbols() {
         RegistrationPage page = new RegistrationPage(driver);
         String random = RandomString.make(10).toLowerCase();

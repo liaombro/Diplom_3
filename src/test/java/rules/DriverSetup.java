@@ -22,11 +22,16 @@ public class DriverSetup implements MethodRule {
         String browser = System.getProperty("browser");
 
         if (browser.equals("chrome")){
-            driver = new ChromeDriver();
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--disable-single-click-autofill");
+            options.addArguments("--headless");
+            driver = new ChromeDriver(options);
 
         } else {
             System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
             ChromeOptions options = new ChromeOptions();
+            options.addArguments("--headless");
+            options.addArguments("--disable-single-click-autofill");
             options.setBinary("C:\\Users\\kvardekkvar\\AppData\\Local\\Yandex\\YandexBrowser\\Application\\browser.exe");
             driver = new ChromeDriver(options);
         }
