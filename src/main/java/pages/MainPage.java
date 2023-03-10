@@ -9,8 +9,6 @@ import java.util.concurrent.TimeUnit;
 
 public class MainPage extends BasePage {
 
-    public static final int HEIGHT = 1024;
-
 
     private final By loginButton = By.cssSelector(".mt-25 button");
     private final By firstBun = By.cssSelector("div[class*=\"BurgerIngredients\"] ul:nth-of-type(1) a:nth-of-type(1)");
