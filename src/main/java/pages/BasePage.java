@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 
 public class BasePage {
 
+    public static final int WIDTH = 1280;
+    public static final int HEIGHT = 1024;
     public static final String BASE_URL = "https://stellarburgers.nomoreparties.site";
 
     protected WebDriver driver;

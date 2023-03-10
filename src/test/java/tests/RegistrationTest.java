@@ -18,7 +18,7 @@ public class RegistrationTest extends TestBase {
 
     @Test
     @DisplayName("Проверка создания аккаунта")
-    public void guestCanRegisterAccount() {
+    public void guestCanRegisterAccountAndLogin() {
         RegistrationPage page = new RegistrationPage(driver);
         String random = RandomString.make(10).toLowerCase();
         String email = String.format("%s@ya.ru", random);

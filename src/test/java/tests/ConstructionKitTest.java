@@ -38,6 +38,7 @@ public class ConstructionKitTest extends TestBase {
         MainPage page = new MainPage(driver);
 
         boolean actual = page.open()
+                .viewFillings()
                 .viewSauces()
                 .checkIfSaucesAreVisible();
 

@@ -6,6 +6,7 @@ import org.junit.runners.model.Statement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import pages.BasePage;
 import tests.TestBase;
 
 import java.time.Duration;
@@ -21,7 +22,7 @@ public class DriverSetup implements MethodRule {
 
         String browser = System.getProperty("browser");
 
-        if (browser.equals("chrome")){
+        if (browser == null || browser.equals("chrome")){
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--disable-single-click-autofill");
             options.addArguments("--headless");
@@ -32,7 +33,7 @@ public class DriverSetup implements MethodRule {
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--headless");
             options.addArguments("--disable-single-click-autofill");
-            options.setBinary("C:\\Users\\kvardekkvar\\AppData\\Local\\Yandex\\YandexBrowser\\Application\\browser.exe");
+            options.setBinary("src/main/resources/yandex_browser/browser.exe");
             driver = new ChromeDriver(options);
         }
 

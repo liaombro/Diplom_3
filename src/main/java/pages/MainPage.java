@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 public class MainPage extends BasePage {
 
+    public static final int HEIGHT = 1024;
 
 
     private final By loginButton = By.cssSelector(".mt-25 button");
@@ -61,7 +62,7 @@ public class MainPage extends BasePage {
         }
         Double itemPosition = getYCoordinateOfElement(locator);
         Double startPosition = getYCoordinateOfElement(beginningOfIngredientList);
-        return itemPosition > startPosition ;
+        return itemPosition > startPosition && itemPosition < HEIGHT ;
     }
     public boolean checkIfBunsAreVisible(){
         return checkIfScrolledTo(firstBun);
